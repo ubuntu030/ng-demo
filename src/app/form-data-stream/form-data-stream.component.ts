@@ -11,4 +11,8 @@ export class FormDataStreamComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  changeName(newName: string): void {
+    this.name = newName;
+  }
 }

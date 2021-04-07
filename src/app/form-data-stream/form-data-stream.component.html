@@ -1,7 +1,18 @@
 <div>
   <h2>Form Data Stream</h2>
   <div>
-    <label>Name: {{ name }}</label>
-    <input id="name" [(ngModel)]="name" placeholder="typing your name..." />
+    <h3>My name: {{ name }}</h3>
+  </div>
+  <div>
+    <label>單向綁定</label>
+    <input #oneWayInput value="{{ name }}" placeholder="one-way biding..."/>
+    <button (click)="changeName(oneWayInput.value)">pass data</button>
+    <p>單向綁定 從引進參數讀取值並由事件傳送新值</p>
+  </div>
+  <hr />
+  <div>
+    <label>雙向綁定</label>
+    <input id="name" [(ngModel)]="name" placeholder="two-way biding..." />
+    <p>雙向綁定使用 ngModel 建立雙向資料流即時更新</p>
   </div>
 </div>
