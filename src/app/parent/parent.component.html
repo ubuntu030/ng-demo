@@ -1,1 +1,7 @@
-<p>parent works!</p>
+<div>
+  <h2>父子元件溝通</h2>
+  <label>TODO</label>
+  <input type="text" #todoInput>
+  <button (click)="add(todoInput.value); todoInput.value='';">add</button>
+  <app-child [todos]="todos"></app-child>
+</div>
