@@ -17,7 +17,7 @@ export class ParentComponent implements OnInit {
   add(dscptn: Itodo['dscptn']): void {
     this.todos.push({
       id: new Date().getTime().toString(),
-      dscptn: dscptn,
+      dscptn,
     });
   }
 

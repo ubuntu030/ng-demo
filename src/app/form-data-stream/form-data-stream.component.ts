@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form-data-stream.component.scss'],
 })
 export class FormDataStreamComponent implements OnInit {
-  name: string = '';
+  name = '';
 
   constructor() {}
 

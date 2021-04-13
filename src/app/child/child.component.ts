@@ -15,9 +15,9 @@ export class ChildComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  delete(id: Itodo['id']) {
+  delete(id: Itodo['id']): void {
     if (id) {
-      this.todoEvent.emit({ id: id });
+      this.todoEvent.emit({ id });
     }
   }
 }
