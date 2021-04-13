@@ -1,7 +1,32 @@
 <div>
   <h2>父子元件溝通</h2>
-  <label>TODO</label>
-  <input type="text" #todoInput>
-  <button (click)="add(todoInput.value); todoInput.value='';">add</button>
-  <app-child [todos]="todos" (todoEvent)="catchEventEmit($event)" ></app-child>
+  <section>
+    <p>@input() @output 溝通</p>
+    <label>TODO</label>
+    <input type="text" #todoInput />
+    <button (click)="add(todoInput.value); todoInput.value = ''">add</button>
+    <app-child [todos]="todos" (todoEvent)="catchEventEmit($event)"></app-child>
+  </section>
+  <hr />
+  <p>@viewChild() 溝通</p>
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Recipient's username"
+      aria-label="Recipient's username"
+      aria-describedby="basic-addon2"
+      [(ngModel)]="messageForAlert"
+    />
+    <div class="input-group-append">
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        (click)="showModal(messageForAlert)"
+      >
+        open
+      </button>
+    </div>
+  </div>
+  <app-alert-modal #appAlertModal></app-alert-modal>
 </div>

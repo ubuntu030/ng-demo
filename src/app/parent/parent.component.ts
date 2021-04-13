@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { AlertModalComponent } from './../alert-modal/alert-modal.component';
 
 import { Itodo } from '../todo';
 
@@ -8,7 +10,10 @@ import { Itodo } from '../todo';
   styleUrls: ['./parent.component.scss'],
 })
 export class ParentComponent implements OnInit {
+  @ViewChild(AlertModalComponent) alertModal!: AlertModalComponent;
   todos: Itodo[] = [];
+
+  messageForAlert = '';
 
   constructor() {}
 
@@ -32,5 +37,13 @@ export class ParentComponent implements OnInit {
     if (event && event.id) {
       this.delete(event.id);
     }
+  }
+
+  showModal(message?: string): void {
+    this.alertModal.show(message);
+  }
+
+  hideModal(): void {
+    this.alertModal.hide();
   }
 }
