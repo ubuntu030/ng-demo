@@ -1,7 +1,12 @@
 <div>
   <ul>
     <li *ngFor="let item of todos">
-      {{item.dscptn}}
+      <div>
+        {{ item.dscptn }}
+        <span>
+          <a href="javascript:;" (click)="delete(item.id)">X</a>
+        </span>
+      </div>
     </li>
   </ul>
 </div>

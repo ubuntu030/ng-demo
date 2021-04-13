@@ -21,11 +21,14 @@ export class ParentComponent implements OnInit {
     });
   }
 
-  delete({ id }: Itodo): void {
-    this.todos.map((item): any => {
-      if (item.id !== id) {
-        return item;
-      }
-    });
+  delete(id: Itodo['id']): void {
+    const newTodo = this.todos.filter((item) => item.id !== id);
+    this.todos = newTodo;
+  }
+
+  catchEventEmit(event: any): void {
+    if (event && event.id) {
+      this.delete(event.id);
+    }
   }
 }

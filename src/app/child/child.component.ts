@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 
 import { Itodo } from '../todo';
 
@@ -9,8 +9,15 @@ import { Itodo } from '../todo';
 })
 export class ChildComponent implements OnInit {
   @Input() todos: Itodo[] = [];
-
+  // 將 todoEvent溢於該元件屬性上
+  @Output() todoEvent = new EventEmitter<any>();
   constructor() {}
 
   ngOnInit(): void {}
+
+  delete(id: Itodo['id']) {
+    if (id) {
+      this.todoEvent.emit({ id: id });
+    }
+  }
 }
