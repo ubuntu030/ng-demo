@@ -1,13 +1,17 @@
-<div>
-  <h2>路由傳值</h2>
-  <section>
-    <h3>Dashboard</h3>
-    <div>
-      <ul>
-        <li *ngFor="let staff of staffs">
-          {{ staff.name }}
-        </li>
-      </ul>
+<h2>路由傳值</h2>
+<div class="container">
+  <h3>職員清單</h3>
+  <div class="row">
+    <div class="col-sm" *ngFor="let staff of staffs">
+      <div class="card" style="width: 18rem">
+        <h5 class="card-header">{{ staff.name }}</h5>
+        <div class="card-body">
+          <p class="card-text">
+            {{ staff.detail }}
+          </p>
+          <a routerLink="/detail/{{ staff.id }}" class="card-link">查看</a>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
 </div>
