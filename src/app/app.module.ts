@@ -10,6 +10,7 @@ import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './child/child.component';
 import { FormDataStreamComponent } from './form-data-stream/form-data-stream.component';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
+import { RoutingComponent } from './routing/routing.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { AlertModalComponent } from './alert-modal/alert-modal.component';
     ChildComponent,
     FormDataStreamComponent,
     AlertModalComponent,
+    RoutingComponent,
   ],
   imports: [
     BrowserModule,
