@@ -28,12 +28,12 @@ export class EmployeeService {
 
   constructor() {}
 
-  getStaff(id: IEmployees['id']): IEmployees | null {
+  getStaff(id: IEmployees['id']): IEmployees | undefined {
     const staffArr = this.employee.filter((item) => item.id === id);
     if (staffArr && staffArr.length > 0) {
       return staffArr[0];
     }
-    return null;
+    return undefined;
   }
 
   getStaffs(): IEmployees[] {
