@@ -15,10 +15,12 @@ export class ParentComponent implements OnInit {
   ngOnInit(): void {}
 
   add(dscptn: Itodo['dscptn']): void {
-    this.todos.push({
-      id: new Date().getTime().toString(),
-      dscptn,
-    });
+    if (dscptn && dscptn.trim()) {
+      this.todos.push({
+        id: new Date().getTime().toString(),
+        dscptn,
+      });
+    }
   }
 
   delete(id: Itodo['id']): void {
