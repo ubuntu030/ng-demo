@@ -11,6 +11,7 @@ import { ChildComponent } from './child/child.component';
 import { FormDataStreamComponent } from './form-data-stream/form-data-stream.component';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 import { RoutingComponent } from './routing/routing.component';
+import { StaffDetailComponent } from './staff-detail/staff-detail.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { RoutingComponent } from './routing/routing.component';
     FormDataStreamComponent,
     AlertModalComponent,
     RoutingComponent,
+    StaffDetailComponent,
   ],
   imports: [
     BrowserModule,
