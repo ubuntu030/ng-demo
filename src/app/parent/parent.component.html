@@ -2,9 +2,28 @@
   <h2>父子元件溝通</h2>
   <section>
     <p>@input() @output 溝通</p>
-    <label>TODO</label>
-    <input type="text" #todoInput />
-    <button (click)="add(todoInput.value); todoInput.value = ''">add</button>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3">TODO:</span>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        id="basic-url"
+        aria-describedby="basic-addon3"
+        #todoInput
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="add(todoInput.value); todoInput.value = ''"
+        >
+          open
+        </button>
+      </div>
+    </div>
+    <label>child component 顯示清單</label>
     <app-child [todos]="todos" (todoEvent)="catchEventEmit($event)"></app-child>
   </section>
   <hr />
