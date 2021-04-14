@@ -1,14 +1,17 @@
 <div>
-  <ul>
-    <li *ngFor="let item of todos">
+  <ul class="list-group">
+    <li
+      class="list-group-item d-flex justify-content-between align-items-start"
+      *ngFor="let item of todos"
+    >
       <div>
         <span>
           {{ item.dscptn }}
         </span>
-        <span>
-          <a href="javascript:;" (click)="delete(item.id)">X</a>
-        </span>
       </div>
+      <span>
+        <a href="javascript:;" (click)="delete(item.id)">X</a>
+      </span>
     </li>
   </ul>
 </div>
