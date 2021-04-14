@@ -1,53 +1,58 @@
 <div>
-  <h2>表單資料流</h2>
-  <div>
-    <h3>My name: {{ name }}</h3>
+  <h2>元素資料流</h2>
+  <div class="row">
+    <ul>
+      <li>錨點 anchor</li>
+      <li>事件傳值</li>
+      <li>ngModel</li>
+    </ul>
   </div>
-  <div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon3">單向綁定</span>
+  <h3>My name: {{ name }}</h3>
+  <div class="row">
+    <div class="col">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3">單向綁定</span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          id="basic-url"
+          aria-describedby="basic-addon3"
+          #oneWayInput
+          placeholder="one-way biding..."
+          value="{{ name }}"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-primary"
+            type="button"
+            (click)="changeName(oneWayInput.value)"
+          >
+            pass data
+          </button>
+        </div>
       </div>
-      <input
-        type="text"
-        class="form-control"
-        id="basic-url"
-        aria-describedby="basic-addon3"
-        #oneWayInput
-        placeholder="one-way biding..."
-        value="{{ name }}"
-      />
-      <div class="input-group-append">
-        <button
-          class="btn btn-primary"
-          type="button"
-          (click)="changeName(oneWayInput.value)"
-        >
-          pass data
-        </button>
-      </div>
+      <p>單向綁定 從引進參數讀取值並由事件傳送新值</p>
     </div>
-    <p>單向綁定 從引進參數讀取值並由事件傳送新值</p>
-  </div>
-  <hr />
-  <div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon3">雙向綁定</span>
+    <div class="col">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3">雙向綁定</span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          id="basic-url"
+          aria-describedby="basic-addon3"
+          placeholder="two-way biding..."
+          [(ngModel)]="name"
+        />
       </div>
-      <input
-        type="text"
-        class="form-control"
-        id="basic-url"
-        aria-describedby="basic-addon3"
-        #oneWayInput
-        placeholder="two-way biding..."
-        [(ngModel)]="name"
-      />
+      <p>
+        雙向綁定使用 ngModel 建立雙向資料流即時更新，需要在 app.Module 引入
+        FormModule
+      </p>
     </div>
-    <p>
-      雙向綁定使用 ngModel 建立雙向資料流即時更新，需要在 app.Module 引入
-      FormModule
-    </p>
   </div>
 </div>
