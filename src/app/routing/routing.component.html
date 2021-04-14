@@ -9,7 +9,12 @@
           <p class="card-text">
             {{ staff.detail }}
           </p>
-          <a routerLink="/detail/{{ staff.id }}" class="card-link">查看</a>
+          <a
+            routerLink="/detail/{{ staff.id }}"
+            [queryParams]="{ message: 'hello world!' }"
+            class="card-link"
+            >查看</a
+          >
         </div>
       </div>
     </div>

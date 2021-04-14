@@ -12,6 +12,7 @@ import { EmployeeService } from '../employee.service';
 })
 export class StaffDetailComponent implements OnInit {
   staff: IEmployees | undefined;
+  queryMessage = '';
 
   constructor(
     private employeeService: EmployeeService,
@@ -30,5 +31,14 @@ export class StaffDetailComponent implements OnInit {
     if (id) {
       self.staff = self.employeeService.getStaff(id);
     }
+
+    const message = self.route.snapshot.queryParams.message;
+    if (message) {
+      this.queryMessage = message;
+    }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
