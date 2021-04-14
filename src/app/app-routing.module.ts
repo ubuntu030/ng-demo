@@ -7,6 +7,7 @@ import { RoutingComponent } from './routing/routing.component';
 import { StaffDetailComponent } from './staff-detail/staff-detail.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/formData', pathMatch: 'full' },
   { path: 'parent', component: ParentComponent },
   { path: 'formData', component: FormDataStreamComponent },
   { path: 'routing', component: RoutingComponent },
