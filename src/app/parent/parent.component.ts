@@ -10,7 +10,10 @@ import { Itodo } from '../todo';
   styleUrls: ['./parent.component.scss'],
 })
 export class ParentComponent implements OnInit {
+  // 使用 AlertModalComponent，或使用錨點 eg.<app-alert-modal #appAlertModal>的 "appAlertModal""
   @ViewChild(AlertModalComponent) alertModal!: AlertModalComponent;
+  // @ViewChild('appAlertModal') alertModal!: AlertModalComponent;
+
   todos: Itodo[] = [];
 
   messageForAlert = '';

@@ -4,8 +4,11 @@
     <div class="col">
       <p>透過 @input() @output 溝通</p>
       <p>@Input() 在子元件中使用，引入從父元件下來的參數。</p>
-      <p>@Ouput() 將 EventEmitter溢於子元件屬性中(app-child)，讓父元件使用 callback接受事件</p>
-      <p>EventEmitter的實例使用 emit(...data)發送資料。</p>
+      <p>
+        @Ouput() 將 EventEmitter溢於子元件屬性中(app-child)，讓父元件使用
+        callback接受事件
+      </p>
+      <p>EventEmitter的實例使用 .emit(...data)發送資料。</p>
     </div>
   </div>
   <section class="row">
@@ -27,7 +30,7 @@
             type="button"
             (click)="add(todoInput.value); todoInput.value = ''"
           >
-            open
+            add
           </button>
         </div>
       </div>
@@ -41,14 +44,13 @@
   <hr />
   <div class="row">
     <div class="col">
-      <ul>
-        <li>@ViewChild</li>
-      </ul>
+      <p>透過 @ViewChild 溝通</p>
+      <p>@ViewChild() 在父元件中使用並引入子元件</p>
+      <p>使父元件可以使用子元件的公開方法(public method)</p>
     </div>
   </div>
   <section class="row">
     <div class="col">
-      <p>@viewChild() 溝通</p>
       <div class="input-group mb-3">
         <input
           type="text"
