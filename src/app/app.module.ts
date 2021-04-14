@@ -12,6 +12,7 @@ import { FormDataStreamComponent } from './form-data-stream/form-data-stream.com
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 import { RoutingComponent } from './routing/routing.component';
 import { StaffDetailComponent } from './staff-detail/staff-detail.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { StaffDetailComponent } from './staff-detail/staff-detail.component';
     AlertModalComponent,
     RoutingComponent,
     StaffDetailComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
