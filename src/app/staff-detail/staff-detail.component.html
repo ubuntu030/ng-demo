@@ -1,1 +1,26 @@
-<p>staff-detail works!</p>
+<h2>職員資料</h2>
+
+<div class="container" *ngIf="staff && staff.id">
+  <div class="row">
+    <div class="col">
+      <h3>姓名</h3>
+      <span>
+        {{ staff.name }}
+      </span>
+    </div>
+    <div class="col">
+      <h3>技能</h3>
+      <ul>
+        <li *ngFor="let item of staff.skill">
+          {{ item }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h3>個人描述</h3>
+      <p>{{ staff.detail }}</p>
+    </div>
+  </div>
+</div>
