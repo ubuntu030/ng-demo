@@ -55,7 +55,7 @@ export class RxjsDemoComponent implements OnInit, AfterViewInit {
     });
   }
 
-  filterDataList(key: string): void {
+  sortDataList(key: string): void {
     const self = this;
     self.tableList$
       .pipe(map((val) => self.sortTable(val, key)))
