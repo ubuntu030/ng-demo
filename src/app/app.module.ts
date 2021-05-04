@@ -15,6 +15,8 @@ import { RoutingComponent } from './routing/routing.component';
 import { StaffDetailComponent } from './staff-detail/staff-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DebugToolDemoComponent } from './debug-tool-demo/debug-tool-demo.component';
+import { RxjsDemoComponent } from './rxjs-demo/rxjs-demo.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,9 +29,11 @@ import { DebugToolDemoComponent } from './debug-tool-demo/debug-tool-demo.compon
     StaffDetailComponent,
     PageNotFoundComponent,
     DebugToolDemoComponent,
+    RxjsDemoComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule,
     ModalModule.forRoot(),
