@@ -1,20 +1,29 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { EmployeeService } from '../employee.service';
 
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, map, pluck, tap } from 'rxjs/operators';
+import { BehaviorSubject, fromEvent, Observable, throwError } from 'rxjs';
+import { catchError, debounceTime, map, pluck, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-rxjs-demo',
   templateUrl: './rxjs-demo.component.html',
   styleUrls: ['./rxjs-demo.component.scss'],
 })
-export class RxjsDemoComponent implements OnInit {
+export class RxjsDemoComponent implements OnInit, AfterViewInit {
+  @ViewChild('searchInput', { static: true }) searchInput!: ElementRef;
   constructor(private employeeService: EmployeeService) {}
   tableList = [];
   tableList$ = new BehaviorSubject<any[]>([]);
+
+  searchInput$!: Observable<any>;
 
   sortSate = {
     type: '',
@@ -22,6 +31,15 @@ export class RxjsDemoComponent implements OnInit {
   };
   ngOnInit(): void {
     const self = this;
+  }
+
+  ngAfterViewInit(): void {
+    const self = this;
+    self.searchInput$ = fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
+      debounceTime(500),
+      map((val: any) => val.target.value),
+    );
+    self.searchInput$.subscribe((res) => console.log(res));
   }
 
   getData(): void {
