@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { EmployeeService } from '../employee.service';
 
-import { BehaviorSubject, fromEvent, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, fromEvent, Observable, of, throwError } from 'rxjs';
 import { catchError, debounceTime, map, pluck, tap } from 'rxjs/operators';
 
 @Component({
@@ -89,9 +89,19 @@ export class RxjsDemoComponent implements OnInit, AfterViewInit {
     const self = this;
     self.tableList$
       .pipe(
+        tap((data) => {
+          if (data.length === 0) {
+            // 主動丟出錯誤
+            throwError('no data');
+          }
+        }),
         map((data) => data.sort(() => 1)),
         map((data) => data.push(self.createData(data))),
-        tap((data) => console.log(data))
+        tap((data) => console.log(data)),
+        catchError((error) => {
+          console.error(error);
+          return of([]);
+        })
       )
       .subscribe()
       .unsubscribe();
