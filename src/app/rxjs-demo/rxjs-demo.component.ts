@@ -10,7 +10,16 @@ import { HttpClient } from '@angular/common/http';
 import { EmployeeService } from '../employee.service';
 
 import { BehaviorSubject, fromEvent, Observable, of, throwError } from 'rxjs';
-import { catchError, debounceTime, map, pluck, tap } from 'rxjs/operators';
+import {
+  catchError,
+  concatAll,
+  debounceTime,
+  map,
+  mapTo,
+  pluck,
+  takeUntil,
+  tap,
+} from 'rxjs/operators';
 
 @Component({
   selector: 'app-rxjs-demo',
@@ -19,6 +28,7 @@ import { catchError, debounceTime, map, pluck, tap } from 'rxjs/operators';
 })
 export class RxjsDemoComponent implements OnInit, AfterViewInit {
   @ViewChild('searchInput', { static: true }) searchInput!: ElementRef;
+  @ViewChild('dragDOM') dragDOM!: ElementRef;
   constructor(private employeeService: EmployeeService) {}
   tableList = [];
   tableList$ = new BehaviorSubject<any[]>([]);
@@ -42,6 +52,8 @@ export class RxjsDemoComponent implements OnInit, AfterViewInit {
       map((val: any) => val.target.value)
     );
     self.searchInput$.subscribe((res) => console.log(res));
+
+    self.dragElement();
   }
 
   getData(): void {
@@ -124,5 +136,27 @@ export class RxjsDemoComponent implements OnInit, AfterViewInit {
   randomFavorite(): string {
     const favoriteArr = this.favoriteArr;
     return favoriteArr[Math.floor(Math.random() * favoriteArr.length)];
+  }
+
+  dragElement(): void {
+    const self = this;
+    const dragDOM = self.dragDOM.nativeElement;
+    const body = document.body;
+    const mouseDown = fromEvent(dragDOM, 'mousedown');
+    const mouseUp = fromEvent(body, 'mouseup');
+    const mouseMove = fromEvent(body, 'mousemove');
+
+    const source = mouseDown.pipe(
+      map((e) => mouseMove.pipe(takeUntil(mouseUp))),
+      concatAll(),
+      map((e: any) => {
+        return { x: e.clientX, y: e.clientY };
+      })
+    );
+
+    source.subscribe((pos) => {
+      dragDOM.style.left = pos.x + 'px';
+      dragDOM.style.top = pos.y + 'px';
+    });
   }
 }
