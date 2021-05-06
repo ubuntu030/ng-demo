@@ -14,11 +14,13 @@ import {
   catchError,
   concatAll,
   debounceTime,
+  filter,
   map,
   mapTo,
   pluck,
   takeUntil,
   tap,
+  withLatestFrom,
 } from 'rxjs/operators';
 
 @Component({
@@ -29,6 +31,8 @@ import {
 export class RxjsDemoComponent implements OnInit, AfterViewInit {
   @ViewChild('searchInput', { static: true }) searchInput!: ElementRef;
   @ViewChild('dragDOM') dragDOM!: ElementRef;
+  @ViewChild('video') video!: ElementRef;
+  @ViewChild('anchor') anchor!: ElementRef;
   constructor(private employeeService: EmployeeService) {}
   tableList = [];
   tableList$ = new BehaviorSubject<any[]>([]);
@@ -54,6 +58,7 @@ export class RxjsDemoComponent implements OnInit, AfterViewInit {
     self.searchInput$.subscribe((res) => console.log(res));
 
     self.dragElement();
+    self.dragVideo();
   }
 
   getData(): void {
@@ -158,5 +163,55 @@ export class RxjsDemoComponent implements OnInit, AfterViewInit {
       dragDOM.style.left = pos.x + 'px';
       dragDOM.style.top = pos.y + 'px';
     });
+  }
+
+  dragVideo(): void {
+    const self = this;
+    const body = document.body;
+    const anchor = self.anchor.nativeElement;
+    const video = self.video.nativeElement;
+    const dragDOM = self.dragDOM.nativeElement;
+    const mouseDown = fromEvent(video, 'mousedown');
+    const mouseUp = fromEvent(body, 'mouseup');
+    const mouseMove = fromEvent(body, 'mousemove');
+
+    const scroll$ = fromEvent(document, 'scroll');
+    scroll$
+      .pipe(map((e) => anchor.getBoundingClientRect().bottom < 0))
+      .subscribe((bool) => {
+        if (bool) {
+          video.classList.add('video-fixed');
+        } else {
+          video.classList.remove('video-fixed');
+        }
+      });
+    mouseDown
+      .pipe(
+        filter((e) => video.classList.contains('video-fixed')),
+        map((e) => mouseMove.pipe(takeUntil(mouseUp))),
+        concatAll(),
+        withLatestFrom(mouseDown, (move: any, down: any) => {
+          return {
+            x: self.validValue(
+              move.clientX - down.offsetX,
+              window.innerWidth - 320,
+              0
+            ),
+            y: self.validValue(
+              move.clientY - down.offsetY,
+              window.innerHeight - 180,
+              0
+            ),
+          };
+        })
+      )
+      .subscribe((pos) => {
+        video.style.top = pos.y + 'px';
+        video.style.left = pos.x + 'px';
+      });
+  }
+
+  validValue(value: any, max: any, min: any): number {
+    return Math.min(Math.max(value, min), max);
   }
 }
