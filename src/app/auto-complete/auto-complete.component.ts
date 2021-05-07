@@ -1,3 +1,4 @@
+import { fromEvent, Observable } from 'rxjs';
 import {
   AfterViewInit,
   Component,
@@ -5,6 +6,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { map, switchAll, switchMap, tap } from 'rxjs/operators';
 const URL =
   'https://zh.wikipedia.org/w/api.php?action=opensearch&format=json&limit=5&origin=*';
 
@@ -14,17 +16,37 @@ const URL =
   styleUrls: ['./auto-complete.component.scss'],
 })
 export class AutoCompleteComponent implements OnInit, AfterViewInit {
-  @ViewChild('searchInpu') searchInpu!: ElementRef;
+  @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild('suggestList') suggestList!: ElementRef;
   constructor() {}
 
-  ngOnInit(): void {}
-  ngAfterViewInit(): void {}
+  keywordInput$!: Observable<any>;
+  selectItem$!: Observable<MouseEvent>;
 
-  getSuggestList(keyword: string) {
-    fetch(URL + '&search=' + keyword, {
+  list = [];
+  ngOnInit(): void {}
+  ngAfterViewInit(): void {
+    const self = this;
+    self.keywordInput$ = fromEvent(self.searchInput.nativeElement, 'input');
+    self.selectItem$ = fromEvent(self.suggestList.nativeElement, 'click');
+    self.autoComplete();
+  }
+
+  getSuggestList(keyword: any): any {
+    return fetch(URL + '&search=' + keyword, {
       method: 'GET',
       mode: 'cors',
     }).then((res) => res.json());
+  }
+
+  autoComplete(): void {
+    const self = this;
+    const keywordInput$ = self.keywordInput$;
+    keywordInput$
+      .pipe(
+        switchMap((e) => self.getSuggestList(e.target.value)),
+        map((response: any) => (self.list = response[1]))
+      )
+      .subscribe(console.log);
   }
 }

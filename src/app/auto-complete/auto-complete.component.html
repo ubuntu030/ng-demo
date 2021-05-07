@@ -1,4 +1,8 @@
 <div class="autocomplete">
-  <input class="input" type="search" #searchInpu autocomplete="off" />
-  <ul #suggestList class="suggest"></ul>
+  <input class="input" type="search" #searchInput autocomplete="off" />
+  <ul #suggestList class="suggest">
+    <ng-container *ngFor="let item of list">
+      <li>{{ item }}</li>
+    </ng-container>
+  </ul>
 </div>
