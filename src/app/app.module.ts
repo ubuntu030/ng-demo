@@ -17,6 +17,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { DebugToolDemoComponent } from './debug-tool-demo/debug-tool-demo.component';
 import { RxjsDemoComponent } from './rxjs-demo/rxjs-demo.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     PageNotFoundComponent,
     DebugToolDemoComponent,
     RxjsDemoComponent,
+    AutoCompleteComponent,
   ],
   imports: [
     BrowserModule,
