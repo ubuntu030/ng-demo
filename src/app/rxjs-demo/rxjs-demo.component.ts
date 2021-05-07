@@ -30,7 +30,6 @@ import {
 })
 export class RxjsDemoComponent implements OnInit, AfterViewInit {
   @ViewChild('searchInput', { static: true }) searchInput!: ElementRef;
-  @ViewChild('dragDOM') dragDOM!: ElementRef;
   @ViewChild('video') video!: ElementRef;
   @ViewChild('anchor') anchor!: ElementRef;
   constructor(private employeeService: EmployeeService) {}
@@ -57,7 +56,6 @@ export class RxjsDemoComponent implements OnInit, AfterViewInit {
     );
     self.searchInput$.subscribe((res) => console.log(res));
 
-    self.dragElement();
     self.dragVideo();
   }
 
@@ -143,34 +141,11 @@ export class RxjsDemoComponent implements OnInit, AfterViewInit {
     return favoriteArr[Math.floor(Math.random() * favoriteArr.length)];
   }
 
-  dragElement(): void {
-    const self = this;
-    const dragDOM = self.dragDOM.nativeElement;
-    const body = document.body;
-    const mouseDown = fromEvent(dragDOM, 'mousedown');
-    const mouseUp = fromEvent(body, 'mouseup');
-    const mouseMove = fromEvent(body, 'mousemove');
-
-    const source = mouseDown.pipe(
-      map((e) => mouseMove.pipe(takeUntil(mouseUp))),
-      concatAll(),
-      map((e: any) => {
-        return { x: e.clientX, y: e.clientY };
-      })
-    );
-
-    source.subscribe((pos) => {
-      dragDOM.style.left = pos.x + 'px';
-      dragDOM.style.top = pos.y + 'px';
-    });
-  }
-
   dragVideo(): void {
     const self = this;
     const body = document.body;
     const anchor = self.anchor.nativeElement;
     const video = self.video.nativeElement;
-    const dragDOM = self.dragDOM.nativeElement;
     const mouseDown = fromEvent(video, 'mousedown');
     const mouseUp = fromEvent(body, 'mouseup');
     const mouseMove = fromEvent(body, 'mousemove');
