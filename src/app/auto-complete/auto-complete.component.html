@@ -1,5 +1,11 @@
 <div class="autocomplete">
-  <input class="input" type="search" #searchInput autocomplete="off" />
+  <input
+    [(ngModel)]="searchInputValue"
+    class="input"
+    type="search"
+    #searchInput
+    autocomplete="off"
+  />
   <ul #suggestList class="suggest">
     <ng-container *ngFor="let item of list">
       <li>{{ item }}</li>
