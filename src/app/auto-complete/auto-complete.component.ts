@@ -59,6 +59,7 @@ export class AutoCompleteComponent implements OnInit, AfterViewInit {
       )
       .subscribe((value) => {
         self.searchInputValue = value;
+        self.list = [];
       });
   }
 }
