@@ -6,7 +6,17 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { filter, map, switchAll, switchMap, tap } from 'rxjs/operators';
+import {
+  debounce,
+  filter,
+  map,
+  switchAll,
+  switchMap,
+  tap,
+  debounceTime,
+  catchError,
+  retry,
+} from 'rxjs/operators';
 const URL =
   'https://zh.wikipedia.org/w/api.php?action=opensearch&format=json&limit=5&origin=*';
 
@@ -47,6 +57,7 @@ export class AutoCompleteComponent implements OnInit, AfterViewInit {
     // 輸入查詢
     keywordInput$
       .pipe(
+        debounceTime(100),
         switchMap((e) => self.getSuggestList(e.target.value)),
         map((response: any) => (self.list = response[1]))
       )
